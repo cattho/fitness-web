@@ -1,0 +1,33 @@
+---
+import Header from "../components/Header.astro";
+import WhatsAppButton from "../components/WhatsAppButton.astro";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{Astro.props.title}</title>
+  </head>
+  <Header />
+  <body class="bg-white text-gray-900">
+    <slot />
+    <WhatsAppButton />
+  </body>
+
+  <style>
+    html,
+    body {
+      scroll-behavior: smooth;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+
+
+</html>

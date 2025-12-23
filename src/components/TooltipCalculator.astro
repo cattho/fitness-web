@@ -1,0 +1,110 @@
+---
+
+---
+
+<div class="absolute top-4 right-4">
+  <div class="flex items-center space-x-2">
+    <span class="text-sm font-medium text-gray-700"> ¿Cómo funciona? </span>
+    <button
+      id="info-button"
+      class="relative flex items-center justify-center w-8 h-8 rounded-full bg-primary text-white hover:bg-opacity-90 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/50"
+      aria-label="¿Cómo funciona esta calculadora?"
+    >
+      <span
+        class="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/75 opacity-75 group-hover:opacity-0"
+      ></span>
+      ?
+    </button>
+  </div>
+
+  <div
+    id="info-tooltip"
+    class="absolute right-0 mt-2 w-80 bg-white shadow-lg rounded-lg p-4 text-sm z-10 border border-gray-200 transition-all duration-300 ease-in-out transform opacity-0 translate-y-2"
+  >
+    <!-- Contenido del tooltip -->
+    <p class="mb-3">
+      Nuestra calculadora estima tus necesidades calóricas y de macronutrientes
+      basándose en tres pasos fundamentales:
+    </p>
+
+    <details class="mb-3" open>
+      <summary class="font-semibold cursor-pointer"
+        >1. Tasa Metabólica Basal (TMB / BMR)</summary
+      >
+      <p class="mt-1 pl-4">
+        Se calcula mediante la fórmula de Mifflin-St Jeor, considerada una de
+        las más fiables.
+        <br /><br />
+        <span class="font-medium">Hombres:</span> (10 × peso) + (6.25 × altura) –
+        (5 × edad) + 5<br />
+        <span class="font-medium">Mujeres:</span> (10 × peso) + (6.25 × altura) –
+        (5 × edad) – 161
+      </p>
+    </details>
+
+    <details class="mb-3">
+      <summary class="font-semibold cursor-pointer"
+        >2. Gasto Energético Diario (TDEE)</summary
+      >
+      <p class="mt-1 pl-4">
+        A la TMB se le aplica un factor de actividad física para estimar las
+        calorías diarias necesarias según tu nivel de actividad.
+      </p>
+    </details>
+
+    <details class="mb-3">
+      <summary class="font-semibold cursor-pointer"
+        >3. Ajuste por objetivo</summary
+      >
+      <p class="mt-1 pl-4">
+        Se ajustan las calorías según tu objetivo (pérdida, mantenimiento o
+        ganancia de peso) y se calcula la distribución de macronutrientes.
+      </p>
+    </details>
+
+    <div class="mt-4 p-3 bg-blue-50 dark:bg-blue-900/30 rounded">
+      <h4 class="font-semibold mb-1">🧾 Por qué confiar en este método</h4>
+      <p class="text-sm">
+        La ecuación de Mifflin-St Jeor ha sido validada en estudios clínicos y
+        se considera una de las más exactas para adultos sanos.
+      </p>
+    </div>
+  </div>
+
+  <script is:client>
+    const button = document.getElementById("info-button");
+    const tooltip = document.getElementById("info-tooltip");
+    let isTooltipOpen = false;
+
+    // Mostrar/ocultar tooltip al hacer clic
+    button.addEventListener("click", (e) => {
+      e.stopPropagation();
+      isTooltipOpen = !isTooltipOpen;
+
+      if (isTooltipOpen) {
+        tooltip.classList.remove("hidden", "opacity-0", "translate-y-2");
+        tooltip.classList.add("block", "opacity-100", "translate-y-0");
+      } else {
+        tooltip.classList.remove("block", "opacity-100", "translate-y-0");
+        tooltip.classList.add("opacity-0", "translate-y-2");
+        setTimeout(() => tooltip.classList.add("hidden"), 300);
+      }
+    });
+
+    // Cerrar al hacer clic fuera
+    document.addEventListener("click", (e) => {
+      if (
+        isTooltipOpen &&
+        !tooltip.contains(e.target) &&
+        !button.contains(e.target)
+      ) {
+        tooltip.classList.remove("block", "opacity-100", "translate-y-0");
+        tooltip.classList.add("opacity-0", "translate-y-2");
+        setTimeout(() => {
+          tooltip.classList.add("hidden");
+          isTooltipOpen = false;
+        }, 300);
+      }
+    });
+  </script>
+</div>
