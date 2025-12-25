@@ -3,6 +3,7 @@
 /* Esto le dice a Tailwind exactamente dónde buscar tus clases */
 @source "../**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}";
 
+
 @layer base {
   body {
     @apply antialiased;
